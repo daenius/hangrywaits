@@ -3,19 +3,20 @@ package com.boolong.hangrywaits;
 /**
  * Created by dennizhu on 3/30/15.
  */
-public class HomeListItem {
+public class Business {
     private String restaurantName;
-    private String phoneNumber;
     private int waitTime;
-    private String address;
     private boolean isFavorite;
+    private String phone;
+    private String address;
 
-    public HomeListItem(String restaurantName, String phoneNumber, String address, int waitTime, boolean isFavorite) {
+    public Business(String restaurantName, int waitTime, boolean isFavorite, String phone,
+                    String address) {
         this.restaurantName = restaurantName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
         this.waitTime = waitTime;
         this.isFavorite = isFavorite;
+        this.phone = phone;
+        this.address = address;
     }
 
     public String getRestaurantName() {
@@ -26,13 +27,6 @@ public class HomeListItem {
         this.restaurantName = restaurantName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getAddress() {
         return address;
@@ -42,6 +36,13 @@ public class HomeListItem {
         this.address = address;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
     public int getWaitTime() {
         return waitTime;
     }
@@ -56,5 +57,10 @@ public class HomeListItem {
 
     public void setFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    @Override
+    public String toString() {
+        return this.restaurantName + " " + this.waitTime + " " + this.phone + " " + this.address;
     }
 }

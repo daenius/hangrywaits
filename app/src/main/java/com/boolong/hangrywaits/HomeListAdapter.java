@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Created by dennizhu on 3/30/15.
  */
-public class HomeListAdapter extends ArrayAdapter<HomeListItem> {
+public class HomeListAdapter extends ArrayAdapter<Business> {
     private final Context context;
-    private final List<HomeListItem> itemsArrayList;
+    private final List<Business> itemsArrayList;
 
-    public HomeListAdapter(Context context, int resource, List<HomeListItem> objects) {
+    public HomeListAdapter(Context context, int resource, List<Business> objects) {
         super(context, resource, objects);
         this.context = context;
         this.itemsArrayList = objects;
@@ -38,7 +38,7 @@ public class HomeListAdapter extends ArrayAdapter<HomeListItem> {
         final TextView phoneNumber = (TextView) rowView.findViewById(R.id.phone_number);
 
         restaurantName.setText(itemsArrayList.get(position).getRestaurantName());
-        phoneNumber.setText("Call: " + itemsArrayList.get(position).getPhoneNumber());
+        phoneNumber.setText("Call: " + itemsArrayList.get(position).getPhone());
         waitTime.setText("" + itemsArrayList.get(position).getWaitTime());
         address.setText(itemsArrayList.get(position).getAddress());
 

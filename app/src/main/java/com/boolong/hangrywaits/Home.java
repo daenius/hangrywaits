@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.boolong.hangrywaits.dataprovider.DataProvider;
+
+import java.util.List;
 
 
 public class Home extends ActionBarActivity
@@ -134,11 +136,9 @@ public class Home extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            ArrayList<HomeListItem> stringsToPopulate = new ArrayList<HomeListItem>();
-            for(int i = 0;i<80;i++){
-                HomeListItem item = new HomeListItem("Restaurant " + i , ("" + i + i), "701 Avenue" + i, (int)(Math.random() * 60), true);
-                stringsToPopulate.add(item);
-            }
+            List<Business> stringsToPopulate = DataProvider.getProvider(getActivity())
+                    .getFavorites();
+
             ListView homeListView=(ListView)rootView.findViewById(R.id.home_list_view);
 
             HomeListAdapter arrayAdapter =
