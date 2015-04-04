@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.boolong.hangrywaits.dataprovider.DataProvider;
@@ -53,7 +54,7 @@ public class Home extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, HomeFragment.newInstance(position + 1))
                 .commit();
     }
 
@@ -110,7 +111,7 @@ public class Home extends ActionBarActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class HomeFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -121,15 +122,15 @@ public class Home extends ActionBarActivity
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static HomeFragment newInstance(int sectionNumber) {
+            HomeFragment fragment = new HomeFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public PlaceholderFragment() {
+        public HomeFragment() {
         }
 
         @Override
@@ -140,6 +141,7 @@ public class Home extends ActionBarActivity
                     .getFavorites();
 
             ListView homeListView=(ListView)rootView.findViewById(R.id.home_list_view);
+            ImageButton searchButton = (ImageButton)rootView.findViewById(R.id.search_button);
 
             HomeListAdapter arrayAdapter =
                     new HomeListAdapter(this.getActivity(), R.layout.home_list_item, stringsToPopulate);
@@ -158,6 +160,20 @@ public class Home extends ActionBarActivity
 
                 }
             });
+
+            searchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    View searchPanel = v.getRootView().findViewById(R.id.search_view);
+                    if(searchPanel.getVisibility() == View.GONE){
+                        searchPanel.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        searchPanel.setVisibility(View.GONE);
+                    }
+                }
+            });
+
             return rootView;
         }
 
