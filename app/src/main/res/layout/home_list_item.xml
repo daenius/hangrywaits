@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Restaurant Name"
         android:id="@+id/restaurant_name"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:paddingRight="@dimen/divider"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Wait Time"
-        android:id="@+id/wait_time"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"/>
+        android:paddingRight="@dimen/divider"
+        android:text="Restaurant Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/wait_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone"
-        android:text="Phone Number"
-        android:id="@+id/phone_number"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Wait Time"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/restaurant_name"
-        android:layout_alignParentStart="true" />
+        android:visibility="gone">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone"
-        android:text="Address"
-        android:id="@+id/address"
-        android:layout_below="@+id/phone_number"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Phone Number"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone"
-        android:text="Last Updated"
-        android:id="@+id/last_updated"
-        android:layout_below="@+id/address" />
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/phone_number"
+            android:text="Address"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:visibility="gone"
-        android:id="@+id/isFavorite"
-        android:checked="false"
-        android:layout_alignBottom="@+id/last_updated"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/last_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:text="Last Updated"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ToggleButton
+            android:id="@+id/isFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/last_updated"
+            android:layout_alignParentEnd="true"
+            android:checked="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="New ToggleButton"/>
+    </RelativeLayout>
 
 </RelativeLayout>

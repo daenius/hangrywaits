@@ -1,6 +1,8 @@
 package com.boolong.hangrywaits;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +32,31 @@ public class HomeListAdapter extends ArrayAdapter<HomeListItem> {
 
         View rowView = inflater.inflate(R.layout.home_list_item, parent, false);
 
-        TextView restaurantName = (TextView) rowView.findViewById(R.id.restaurant_name);
-        TextView waitTime = (TextView) rowView.findViewById(R.id.wait_time);
+        final TextView restaurantName = (TextView) rowView.findViewById(R.id.restaurant_name);
+        final TextView waitTime = (TextView) rowView.findViewById(R.id.wait_time);
+        final TextView address = (TextView) rowView.findViewById(R.id.address);
+        final TextView phoneNumber = (TextView) rowView.findViewById(R.id.phone_number);
 
         restaurantName.setText(itemsArrayList.get(position).getRestaurantName());
+        phoneNumber.setText("Call: " + itemsArrayList.get(position).getPhoneNumber());
         waitTime.setText("" + itemsArrayList.get(position).getWaitTime());
+        address.setText(itemsArrayList.get(position).getAddress());
+
+        phoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phoneNumber.getText().toString()));
+                context.startActivity(callIntent);
+            }
+        });
+
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open google map
+            }
+        });
 
         return rowView;
     }

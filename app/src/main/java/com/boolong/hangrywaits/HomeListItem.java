@@ -5,11 +5,15 @@ package com.boolong.hangrywaits;
  */
 public class HomeListItem {
     private String restaurantName;
+    private String phoneNumber;
     private int waitTime;
+    private String address;
     private boolean isFavorite;
 
-    public HomeListItem(String restaurantName, int waitTime, boolean isFavorite) {
+    public HomeListItem(String restaurantName, String phoneNumber, String address, int waitTime, boolean isFavorite) {
         this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.waitTime = waitTime;
         this.isFavorite = isFavorite;
     }
@@ -20,6 +24,22 @@ public class HomeListItem {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getWaitTime() {

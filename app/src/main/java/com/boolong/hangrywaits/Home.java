@@ -1,28 +1,21 @@
 package com.boolong.hangrywaits;
 
 import android.app.Activity;
-import android.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 
 public class Home extends ActionBarActivity
@@ -143,24 +136,28 @@ public class Home extends ActionBarActivity
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             ArrayList<HomeListItem> stringsToPopulate = new ArrayList<HomeListItem>();
             for(int i = 0;i<80;i++){
-                HomeListItem item = new HomeListItem("Restaurant " + i , (int)(Math.random() * 60), true);
+                HomeListItem item = new HomeListItem("Restaurant " + i , ("" + i + i), "701 Avenue" + i, (int)(Math.random() * 60), true);
                 stringsToPopulate.add(item);
             }
             ListView homeListView=(ListView)rootView.findViewById(R.id.home_list_view);
-            homeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    view.findViewById(R.id.phone_number).setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.address).setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.last_updated).setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.isFavorite).setVisibility(View.VISIBLE);
 
-                }
-            });
             HomeListAdapter arrayAdapter =
                     new HomeListAdapter(this.getActivity(), R.layout.home_list_item, stringsToPopulate);
             // Set The Adapter
             homeListView.setAdapter(arrayAdapter);
+
+            homeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (view.findViewById(R.id.details).getVisibility() == View.VISIBLE){
+                        view.findViewById(R.id.details).setVisibility(View.GONE);
+                    }
+                    else {
+                        view.findViewById(R.id.details).setVisibility(View.VISIBLE);
+                    }
+
+                }
+            });
             return rootView;
         }
 
