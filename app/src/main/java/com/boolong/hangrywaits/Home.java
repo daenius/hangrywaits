@@ -1,5 +1,6 @@
 package com.boolong.hangrywaits;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -104,7 +105,6 @@ public class Home extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -141,7 +141,7 @@ public class Home extends ActionBarActivity
                     .getFavorites();
 
             ListView homeListView=(ListView)rootView.findViewById(R.id.home_list_view);
-            ImageButton searchButton = (ImageButton)rootView.findViewById(R.id.search_button);
+            final ImageButton searchButton = (ImageButton)rootView.findViewById(R.id.search_button);
 
             HomeListAdapter arrayAdapter =
                     new HomeListAdapter(this.getActivity(), R.layout.home_list_item, stringsToPopulate);
@@ -160,20 +160,22 @@ public class Home extends ActionBarActivity
 
                 }
             });
-
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     View searchPanel = v.getRootView().findViewById(R.id.search_view);
+                    ObjectAnimator anim = ObjectAnimator.ofFloat(searchPanel, "translationX", 0f, 400f);
+                    anim.setDuration(1000);
                     if(searchPanel.getVisibility() == View.GONE){
                         searchPanel.setVisibility(View.VISIBLE);
                     }
                     else{
                         searchPanel.setVisibility(View.GONE);
                     }
+                    anim.start();
+
                 }
             });
-
             return rootView;
         }
 
@@ -184,5 +186,4 @@ public class Home extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
 }
