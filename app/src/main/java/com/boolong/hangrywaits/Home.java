@@ -1,5 +1,7 @@
 package com.boolong.hangrywaits;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
@@ -140,8 +142,8 @@ public class Home extends ActionBarActivity
             List<Business> stringsToPopulate = DataProvider.getProvider(getActivity())
                     .getFavorites();
 
-            ListView homeListView=(ListView)rootView.findViewById(R.id.home_list_view);
-            final ImageButton searchButton = (ImageButton)rootView.findViewById(R.id.search_button);
+            ListView homeListView = (ListView) rootView.findViewById(R.id.home_list_view);
+            final ImageButton searchButton = (ImageButton) rootView.findViewById(R.id.search_button);
 
             HomeListAdapter arrayAdapter =
                     new HomeListAdapter(this.getActivity(), R.layout.home_list_item, stringsToPopulate);
@@ -151,10 +153,9 @@ public class Home extends ActionBarActivity
             homeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (view.findViewById(R.id.details).getVisibility() == View.VISIBLE){
+                    if (view.findViewById(R.id.details).getVisibility() == View.VISIBLE) {
                         view.findViewById(R.id.details).setVisibility(View.GONE);
-                    }
-                    else {
+                    } else {
                         view.findViewById(R.id.details).setVisibility(View.VISIBLE);
                     }
 
@@ -163,17 +164,28 @@ public class Home extends ActionBarActivity
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    View searchPanel = v.getRootView().findViewById(R.id.search_view);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(searchPanel, "translationX", 0f, 400f);
-                    anim.setDuration(1000);
-                    if(searchPanel.getVisibility() == View.GONE){
+                    final View searchPanel = v.getRootView().findViewById(R.id.search_view);
+                    ObjectAnimator animateX = ObjectAnimator.ofFloat(searchPanel, "translationX", v.getRootView().getRight(), v.getRootView().getLeft());
+                    ObjectAnimator animateY = ObjectAnimator.ofFloat(searchPanel, "translationY", v.getRootView().getBottom(), v.getRootView().getTop());
+                    animateX.setDuration(350);
+                    animateY.setDuration(350);
+                    if (searchPanel.getVisibility() == View.GONE) {
                         searchPanel.setVisibility(View.VISIBLE);
+                    } else {
+                        animateX = ObjectAnimator.ofFloat(searchPanel, "translationX", v.getRootView().getLeft(), v.getRootView().getRight());
+                        animateY = ObjectAnimator.ofFloat(searchPanel, "translationY", v.getRootView().getTop(), v.getRootView().getBottom());
+                        animateX.setDuration(200);
+                        animateY.setDuration(200);
+                        animateX.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                searchPanel.setVisibility(View.GONE);
+                            }
+                        });
                     }
-                    else{
-                        searchPanel.setVisibility(View.GONE);
-                    }
-                    anim.start();
-
+                    animateX.start();
+                    animateY.start();
                 }
             });
             return rootView;
