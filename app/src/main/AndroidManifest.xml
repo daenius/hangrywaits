@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCrBwaDlNJp_JZ4COT4pd8grHdj3DHT7oY"/>
     </application>
 
 </manifest>
