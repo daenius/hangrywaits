@@ -8,6 +8,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 /**
@@ -50,18 +51,26 @@ public class HangryContentProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables("favorites");
         switch (uriMatcher.match(uri)) {
             // maps all database column names
             case BUSINESSES:
-//                queryBuilder.setProjectionMap(BirthMap);
                 break;
             case BUSINESSES_ID:
-//                queryBuilder.appendWhere(ID + "=" + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        return null;
+        Cursor cursor = queryBuilder.query(mDatabase, projection, selection,
+                selectionArgs, null, null, sortOrder);
+        /**
+         * register to watch a content URI for changes
+         */
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        return cursor;
     }
 
     @Override
