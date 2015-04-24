@@ -14,7 +14,7 @@ public class MainDatabaseHelper extends SQLiteOpenHelper {
     // A string that defines the SQL statement for creating a table
     private static final String SQL_CREATE_MAIN = "CREATE TABLE " +
             "favorites " +
-            "( _id INTEGER PRIMARY KEY, name TEXT, waitTime INTEGER, phone TEXT, address TEXT)";
+            "( _id INTEGER PRIMARY KEY, googlePlaceId TEXT, name TEXT, waitTime INTEGER, phone TEXT, address TEXT)";
 
         /*
          * Instantiates an open helper for the provider's SQLite data repository

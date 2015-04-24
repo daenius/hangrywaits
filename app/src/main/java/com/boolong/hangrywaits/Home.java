@@ -1,10 +1,5 @@
 package com.boolong.hangrywaits;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -12,18 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import com.boolong.hangrywaits.dataprovider.DataProvider;
-import com.boolong.hangrywaits.googleplaces.GooglePlaces;
-import com.boolong.hangrywaits.googleplaces.PlacesList;
-
-import java.util.List;
-
-import at.markushi.ui.CircleButton;
 
 
 public class Home extends ActionBarActivity
@@ -38,10 +21,6 @@ public class Home extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
-    private GooglePlaces googlePlaces;
-
-    private PlacesList nearPlaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,6 +20,7 @@ public class HangryContentProvider extends ContentProvider {
     static final Uri CONTENT_URI = Uri.parse(URL);
 
     static final String ID = "_id";
+    static final String GOOGLE_PLACE_ID = "googlePlaceId";
     static final String NAME = "name";
     static final String WAIT_TIME = "waitTime";
     static final String PHONE = "phone";
