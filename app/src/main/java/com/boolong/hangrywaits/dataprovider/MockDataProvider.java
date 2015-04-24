@@ -33,11 +33,10 @@ public class MockDataProvider extends DataProvider {
             values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_WAIT_TIME, (int) (Math.random() * 60));
             values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_PHONE, "(666)666-6666");
             values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_ADDRESS, (int) (Math.random() * 1000) + " " + UUID.randomUUID().toString());
+            Uri uri = context.getContentResolver().insert(
+                    HangryContentProvider.CONTENT_URI, values);
+            System.out.println(uri);
         }
-        Uri uri = context.getContentResolver().insert(
-                HangryContentProvider.CONTENT_URI, values);
-        System.out.println(uri);
-
     }
 
     @Override
