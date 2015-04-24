@@ -78,8 +78,8 @@ public class HomeFragment extends Fragment {
                 if (searchPanel.getVisibility() == View.GONE) {
                     animateX = ObjectAnimator.ofFloat(searchPanel, "translationX", v.getRootView().getRight() - v.getWidth()/2, v.getRootView().getLeft());
                     animateY = ObjectAnimator.ofFloat(searchPanel, "translationY", v.getRootView().getBottom() - v.getHeight()/2, v.getRootView().getTop());
-                    animateX.setDuration(350);
-                    animateY.setDuration(350);
+                    animateX.setDuration(200);
+                    animateY.setDuration(200);
                     searchPanel.setVisibility(View.VISIBLE);
                 } else {
                     animateX = ObjectAnimator.ofFloat(searchPanel, "translationX", v.getRootView().getLeft(), v.getRootView().getRight() - v.getWidth()/2);

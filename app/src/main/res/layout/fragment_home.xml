@@ -22,8 +22,8 @@
     <RelativeLayout
         android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_material_light"
+        android:layout_height="wrap_content"
+        android:background="@color/background_floating_material_light"
         android:visibility="gone"
         android:layout_alignEnd="@+id/home_list_view"
         android:layout_alignBottom="@+id/home_list_view">
@@ -34,7 +34,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:hint="Search By Name"/>
+            android:hint="Search By Name"
+            android:imeOptions="actionSearch"
+            android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        <EditText
+            android:id="@+id/location_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Near Me"
+            android:layout_below="@+id/search_box"
+            android:layout_alignParentStart="true" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/location_box"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="false" />
     </RelativeLayout>
 
     <at.markushi.ui.CircleButton
