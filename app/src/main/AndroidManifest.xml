@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.boolong.hangrywaits"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.boolong.hangrywaits" >
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,12 +21,10 @@
         <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCrBwaDlNJp_JZ4COT4pd8grHdj3DHT7oY"/>
+            android:value="AIzaSyBpC_IH5BezknQ-rTgJ89bL8bEa_cDoKm4"/>
         <provider
             android:name=".dataprovider.HangryContentProvider"
             android:authorities="com.boolong.hangrywaits.hangryprovider"></provider>
-
-
     </application>
 
 </manifest>

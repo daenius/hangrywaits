@@ -1,22 +1,60 @@
 package com.boolong.hangrywaits;
 
 /**
- * Created by dennizhu on 3/30/15.
+ * Class represents each business with its business information.
  */
 public class Business {
+    private String id;
+    private String googlePlaceId;
     private String restaurantName;
     private int waitTime;
     private boolean isFavorite;
     private String phone;
     private String address;
 
-    public Business(String restaurantName, int waitTime, boolean isFavorite, String phone,
+    public Business(String id, String googlePlaceId, String restaurantName, int waitTime, boolean isFavorite, String phone,
+                    String address) {
+        this.id = id;
+        this.googlePlaceId = googlePlaceId;
+        this.restaurantName = restaurantName;
+        this.waitTime = waitTime;
+        this.isFavorite = isFavorite;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public Business( String restaurantName, int waitTime, boolean isFavorite, String phone,
                     String address) {
         this.restaurantName = restaurantName;
         this.waitTime = waitTime;
         this.isFavorite = isFavorite;
         this.phone = phone;
         this.address = address;
+    }
+
+    /**
+     * Get the ID of the business.
+     *
+     * @return ID
+     */
+    public String getId(){
+        return id;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    /**
+     * Get the ID of the result return from Google Place API.
+     * @return Google Place ID
+     */
+    public String getGooglePlaceId(){
+        return googlePlaceId;
+    }
+
+    public void setGooglePlaceId(String googlePlaceId){
+        this.googlePlaceId = googlePlaceId;
     }
 
     public String getRestaurantName() {
@@ -26,7 +64,6 @@ public class Business {
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
     }
-
 
     public String getAddress() {
         return address;

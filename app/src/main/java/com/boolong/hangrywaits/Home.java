@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,10 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.boolong.hangrywaits.dataprovider.DataProvider;
+import com.boolong.hangrywaits.googleplaces.GooglePlaces;
+import com.boolong.hangrywaits.googleplaces.PlacesList;
 
 import java.util.List;
 
@@ -38,6 +40,10 @@ public class Home extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    private GooglePlaces googlePlaces;
+
+    private PlacesList nearPlaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +110,7 @@ public class Home extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        new LoadPlaces().execute();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -169,6 +175,7 @@ public class Home extends ActionBarActivity
                     final View searchPanel = v.getRootView().findViewById(R.id.search_view);
                     ObjectAnimator animateX;
                     ObjectAnimator animateY;
+
                     if (searchPanel.getVisibility() == View.GONE) {
                         animateX = ObjectAnimator.ofFloat(searchPanel, "translationX", v.getRootView().getRight() - v.getWidth()/2, v.getRootView().getLeft());
                         animateY = ObjectAnimator.ofFloat(searchPanel, "translationY", v.getRootView().getBottom() - v.getHeight()/2, v.getRootView().getTop());
@@ -200,6 +207,35 @@ public class Home extends ActionBarActivity
             super.onAttach(activity);
             ((Home) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    class LoadPlaces extends AsyncTask<String, String, String> {
+
+        /**
+         * getting Places JSON
+         */
+        protected String doInBackground(String... args) {
+            // creating Places class object
+            googlePlaces = new GooglePlaces();
+
+            try {
+                // Separeate your place types by PIPE symbol "|"
+                // If you want all types places make it as null
+                // Check list of types supported by google
+                //
+                String types = "cafe|restaurant"; // Listing places only cafes, restaurants
+
+                // Radius in meters - increase this value if you don't find any places
+                double radius = 1000; // 1000 meters
+
+                // get nearest places
+                nearPlaces = googlePlaces.search(37.377, -122.031, radius, types);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }
