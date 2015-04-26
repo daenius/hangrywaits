@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.boolong.hangrywaits.dataprovider.DataProvider;
+import com.boolong.hangrywaits.googleplaces.ConnectionDetector;
 import com.boolong.hangrywaits.googleplaces.GooglePlaces;
+import com.boolong.hangrywaits.googleplaces.GpsTracker;
 import com.boolong.hangrywaits.googleplaces.Place;
 import com.boolong.hangrywaits.googleplaces.PlacesList;
 
@@ -26,9 +29,6 @@ import java.util.List;
 
 import at.markushi.ui.CircleButton;
 
-/**
- * Created by daenius on 4/23/15.
- */
 public class HomeFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
@@ -44,6 +44,12 @@ public class HomeFragment extends Fragment {
 
     //Home List View
     ListView homeListView;
+
+    //Gps Tracker
+    GpsTracker gps;
+
+    //Connection Detector
+    ConnectionDetector connectionDetector;
 
     // KEY Strings
     public static String KEY_REFERENCE = "reference"; // id of the place
@@ -68,6 +74,28 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        connectionDetector = new ConnectionDetector(this.getActivity());
+
+
+        // Check if Internet present
+        boolean isInternetPresent = connectionDetector.isConnectingToInternet();
+        if (!isInternetPresent) {
+            //FIXME
+        }
+
+        // creating GPS Class object
+        gps = new GpsTracker(this.getActivity());
+
+        // check if GPS location can get
+        if (gps.canGetLocation()) {
+            Log.d("Your Location", "latitude:" + gps.getLatitude() + ", longitude: " + gps.getLongitude());
+        } else {
+            //FIXME
+        }
+
+
+
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         List<Business> stringsToPopulate = DataProvider.getProvider(getActivity())
                 .getFavorites();
@@ -161,7 +189,7 @@ public class HomeFragment extends Fragment {
                 double radius = 1000; // 1000 meters
 
                 // get nearest places
-                nearPlaces = googlePlaces.search(37.377, -122.031, radius, types);
+                nearPlaces = googlePlaces.search(gps.getLatitude(), gps.getLongitude(), radius, types);
 
 
             } catch (Exception e) {
