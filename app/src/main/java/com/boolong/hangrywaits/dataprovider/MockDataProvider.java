@@ -18,25 +18,22 @@ import java.util.UUID;
  */
 public class MockDataProvider extends DataProvider {
 
-    private SQLiteDatabase db;
-    private MainDatabaseHelper mOpenHelper;
     private Context mContext;
-
 
     public MockDataProvider(Context context) {
         super();
         this.mContext = context;
-        ContentValues values = new ContentValues();
-
-        for (int i = 0; i < 80; i++) {
-            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_NAME, "Restaurant " + i);
-            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_WAIT_TIME, (int) (Math.random() * 60));
-            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_PHONE, "(666)666-6666");
-            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_ADDRESS, (int) (Math.random() * 1000) + " " + UUID.randomUUID().toString());
-            Uri uri = context.getContentResolver().insert(
-                    HangryContentProvider.CONTENT_URI, values);
-            System.out.println(uri);
-        }
+//        ContentValues values = new ContentValues();
+//
+//        for (int i = 0; i < 80; i++) {
+//            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_NAME, "Restaurant " + i);
+//            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_WAIT_TIME, (int) (Math.random() * 60));
+//            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_PHONE, "(666)666-6666");
+//            values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_ADDRESS, (int) (Math.random() * 1000) + " " + UUID.randomUUID().toString());
+//            Uri uri = context.getContentResolver().insert(
+//                    HangryContentProvider.CONTENT_URI, values);
+//            System.out.println(uri);
+//        }
     }
 
     @Override
@@ -60,5 +57,25 @@ public class MockDataProvider extends DataProvider {
         }
         cursor.close();
         return results;
+    }
+
+    @Override
+    public List<Business> getBusiness(List<String> googlePlacesIds) {
+        return null;
+    }
+
+    @Override
+    public void addFavorite(Business business) {
+        ContentValues values = new ContentValues();
+        values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_NAME, business.getRestaurantName());
+        values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_WAIT_TIME, business.getWaitTime());
+        values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_PHONE, business.getPhone());
+        values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_ADDRESS, business.getAddress());
+        values.put(BusinessDataContract.BusinessEntry.COLUMN_NAME_GOOGLE_PLACES_ID, business.getGooglePlaceId());
+
+        Uri uri = mContext.getContentResolver().insert(
+                HangryContentProvider.CONTENT_URI, values);
+        System.out.println("Inserting with " + uri);
+
     }
 }

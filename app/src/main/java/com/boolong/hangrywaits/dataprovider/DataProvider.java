@@ -1,6 +1,5 @@
 package com.boolong.hangrywaits.dataprovider;
 
-import android.content.ContentProvider;
 import android.content.Context;
 
 import com.boolong.hangrywaits.Business;
@@ -15,4 +14,8 @@ public abstract class DataProvider{
         return new MockDataProvider(context);
     }
     public abstract List<Business> getFavorites();
+
+    public abstract List<Business> getBusiness(List<String> googlePlacesIds);
+
+    public abstract void addFavorite(Business business);
 }

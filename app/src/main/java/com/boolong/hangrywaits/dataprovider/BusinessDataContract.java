@@ -16,6 +16,7 @@ public final class BusinessDataContract {
         public static final String COLUMN_NAME_WAIT_TIME = "waitTime";
         public static final String COLUMN_NAME_PHONE = "phone";
         public static final String COLUMN_NAME_ADDRESS = "address";
+        public static final String COLUMN_NAME_GOOGLE_PLACES_ID = "googlePlaceId";
 
     }
 }

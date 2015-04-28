@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.boolong.hangrywaits.dataprovider.DataProvider;
@@ -143,8 +144,6 @@ public class HomeFragment extends Fragment {
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             searchPanel.setVisibility(View.GONE);
-
-
                         }
                     });
                 }

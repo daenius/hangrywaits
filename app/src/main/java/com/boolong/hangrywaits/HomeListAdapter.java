@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import com.boolong.hangrywaits.dataprovider.DataProvider;
 
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class HomeListAdapter extends ArrayAdapter<Business> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -36,11 +39,13 @@ public class HomeListAdapter extends ArrayAdapter<Business> {
         final TextView waitTime = (TextView) rowView.findViewById(R.id.wait_time);
         final TextView address = (TextView) rowView.findViewById(R.id.address);
         final TextView phoneNumber = (TextView) rowView.findViewById(R.id.phone_number);
+        final ToggleButton isFavorite = (ToggleButton) rowView.findViewById(R.id.isFavorite);
 
         restaurantName.setText(itemsArrayList.get(position).getRestaurantName());
         phoneNumber.setText("Call: " + itemsArrayList.get(position).getPhone());
         waitTime.setText("" + itemsArrayList.get(position).getWaitTime());
         address.setText(itemsArrayList.get(position).getAddress());
+        isFavorite.setChecked(itemsArrayList.get(position).isFavorite());
 
         phoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +60,16 @@ public class HomeListAdapter extends ArrayAdapter<Business> {
             @Override
             public void onClick(View v) {
                 //Open google map
+            }
+        });
+
+        isFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(((ToggleButton)v).isChecked()){
+                    DataProvider provider = DataProvider.getProvider(context);
+                    provider.addFavorite(itemsArrayList.get(position));
+                }
             }
         });
 
